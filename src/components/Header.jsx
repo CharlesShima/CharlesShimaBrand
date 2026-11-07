@@ -10,10 +10,15 @@ export default function Header() {
   const { pathname } = useLocation()
   const isHome = pathname === '/'
 
-  useEffect(() => setOpen(false), [pathname])
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
+
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
-    const onKey = (e) => e.key === 'Escape' && setOpen(false)
+    const onKey = (e) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [open])

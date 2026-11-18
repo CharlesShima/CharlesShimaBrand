@@ -6,13 +6,15 @@ import { useContent } from '../lib/content'
 import CollectionEditor from './CollectionEditor'
 import SettingsEditor from './SettingsEditor'
 import Bookings from './Bookings'
+import Subscribers from './Subscribers'
 import './admin.css'
 
 const SECTIONS = [
   ['bookings', 'Bookings'],
+  ['subscribers', 'Subscribers'],
   ['posts', 'Blog posts'],
   ['settings', 'Site settings'],
-  ['contributions', 'How I contribute'],
+  ['contributions', 'How I help'],
   ['speaking', 'Speaking'],
   ['ventures', 'Ventures'],
   ['press', 'Press'],
@@ -109,7 +111,8 @@ export default function AdminApp() {
           <Route index element={<Navigate to="bookings" replace />} />
           <Route path="bookings" element={<Bookings />} />
           <Route path="settings" element={<SettingsEditor />} />
-          {SECTIONS.filter(([k]) => !['bookings', 'settings'].includes(k)).map(([key]) => (
+          <Route path="subscribers" element={<Subscribers />} />
+          {SECTIONS.filter(([k]) => !['bookings', 'settings', 'subscribers'].includes(k)).map(([key]) => (
             <Route key={key} path={key} element={<CollectionEditor table={key} />} />
           ))}
           <Route path="*" element={<Navigate to="bookings" replace />} />

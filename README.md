@@ -1,8 +1,22 @@
 # ShimaCharles.ca
 
-Personal brand website for Charles Shima: React (Vite) front end, Supabase for the CMS, bookings, login and images, hosted on Hostinger, deployed from GitHub.
+## November 2026 update: the Travelpreneur™ focus
 
-- **Visitors** see a fast static site with your portrait-and-menu landing page.
+The site now leads with one promise for travel creators, with your companies underneath as proof. To put it live:
+
+1. **Upload the code to GitHub** (replace the existing files). Netlify rebuilds automatically.
+2. **Update the live text in Supabase**: SQL Editor → New query → paste `supabase/update-2026-11-travelpreneur.sql` → Run. Without this step the site keeps showing the old text, because your text lives in the database. It only changes the text it lists; your images, email, WhatsApp number and social links are kept. Old offers and booking options are hidden, not deleted.
+3. **Check it** at shimacharles.ca, then fine-tune any wording in /admin → Site settings.
+
+What's new: hero promise, a scrolling band of stages and features, two paths (Start / Monetise), five offers in "How I help", a "How it works" band, the proof line, talk topics and speaker reel on Speaking, ZaNiheza live with zaniheza.com, The Travelpreneur Note sign-up (Admin → Subscribers), and an FAQ for search and AI answer engines. Colours: marigold, terracotta and emerald now sit alongside your purple.
+
+**Email sign-ups:** addresses are saved in Supabase and listed in Admin → Subscribers, with a CSV download. Nothing is emailed automatically yet. To send the guide and the weekly note automatically, connect an email provider (Kit, MailerLite or Beehiiv) and import the CSV; see the TODO in `src/components/Sections.jsx` (Newsletter).
+
+---
+
+Personal brand website for Charles Shima: React (Vite) front end, Supabase for the CMS, bookings, sign-ups, login and images, hosted on Netlify, deployed from GitHub.
+
+- **Visitors** see a fast static site that leads with the Travelpreneur™ promise.
 - **You** sign in at `shimacharles.ca/admin` to change text, images, logo, blog posts, speaking, ventures, press and booking options, and to manage booking requests.
 - The site works even before Supabase is connected: it shows the starting content and the booking form opens the visitor's email app.
 
@@ -86,6 +100,8 @@ Where things live:
 |---|---|
 | Colours, fonts, all styling | `src/styles.css` |
 | Landing page and sections | `src/components/Sections.jsx` |
+| FAQ (search and AI answer engines) | `src/components/Faq.jsx` |
+| Text for AI crawlers | `public/llms.txt` |
 | Menu items | `src/components/nav.js` |
 | Booking page | `src/pages/WorkWithMe.jsx` |
 | Admin fields (add a field = it appears in the editor) | `src/admin/schemas.js` |

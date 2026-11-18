@@ -63,7 +63,7 @@ export default function WorkWithMe() {
 
   return (
     <>
-      <Seo title="Work with me" description="Book a speaking engagement, coaching session, advisory call or a conversation with Charles Shima." />
+      <Seo title="Work with me" description="Book Charles Shima for a keynote, a coaching session for travel creators, a Tourifique conversation, or storytelling and AI help." />
       <PageHero title="Work with me" intro={settings.contactBody} />
 
       <section className="section section--tight">

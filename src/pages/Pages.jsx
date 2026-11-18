@@ -1,27 +1,40 @@
 import { Link } from 'react-router-dom'
 import Seo from '../components/Seo'
+import Faq from '../components/Faq'
 import { useContent } from '../lib/content'
 import {
   AboutBlock,
   ConnectBand,
-  ContributeList,
-  HeroOrbit,
+  HeroPromise,
+  Newsletter,
+  Offers,
   PageHero,
+  Paths,
   PressList,
+  Proof,
   SpeakingStrip,
+  SpeakingTopics,
+  Steps,
+  Ticker,
   VenturesBlock,
 } from '../components/Sections'
 
+// Order follows one promise first, then a door for each visitor, then the proof.
 export function Home() {
   return (
     <>
-      <Seo />
-      <HeroOrbit />
-      <AboutBlock />
-      <ContributeList />
+      <Seo type="profile" />
+      <HeroPromise />
+      <Ticker />
+      <Paths />
+      <Offers />
+      <Steps />
+      <Proof />
       <SpeakingStrip />
       <VenturesBlock />
+      <Newsletter />
       <PressList limitPosts={3} />
+      <Faq />
       <ConnectBand />
     </>
   )
@@ -31,9 +44,15 @@ export function About() {
   const { settings } = useContent()
   return (
     <>
-      <Seo title="Who is Shima" description={settings.aboutQuote || settings.seoDescription} image={settings.aboutImage} />
-      <PageHero title="Who is Shima" />
-      <AboutBlock full />
+      <Seo
+        title="Who is Charles Shima"
+        description="Born in Kinshasa, raised in Rwanda, orphaned at 13, in Canada at 19 with no money. Charles Shima is now the Architect of the Travelpreneur™ Economy and founder of Tourifique and ZaNiheza."
+        image={settings.aboutImage}
+        type="profile"
+      />
+      <PageHero title="Who is Shima" intro={settings.proofLine} />
+      <AboutBlock />
+      <VenturesBlock />
       <ConnectBand />
     </>
   )
@@ -42,9 +61,15 @@ export function About() {
 export function Contribute() {
   return (
     <>
-      <Seo title="How I contribute" description="Coaching and mentorship, advisory and collaboration, content and storytelling, and cross-border living between Canada and Rwanda." />
-      <PageHero title="How I contribute" intro="Different ways to work together, all rooted in building across borders." />
-      <ContributeList showHead={false} />
+      <Seo
+        title="How I help travel creators"
+        description="Build with Tourifique, storytelling and content, AI for travel creators, speaking, and coaching and mentorship: five ways Charles Shima helps travel creators earn beyond brand deals."
+      />
+      <PageHero title="How I help" intro="Five ways to turn what you know about travel into income, beyond brand deals." tone="lilac" />
+      <Paths />
+      <Offers showHead={false} />
+      <Steps />
+      <Newsletter />
       <ConnectBand />
     </>
   )
@@ -53,18 +78,18 @@ export function Contribute() {
 export function Speaking() {
   return (
     <>
-      <Seo title="Speaking" description="Keynotes, panels and appearances by Charles Shima on travel, technology, entrepreneurship and building across borders." />
-      <PageHero title="Speaking" intro="Keynotes, panels, fireside chats and moderation on travel, technology and building across borders." />
-      <SpeakingStrip showHead={false} />
-      <section className="section">
-        <div className="wrap narrow">
-          <h2 className="h3">Invite Charles to your event</h2>
-          <p>Share the date, audience and theme, and Charles will reply with availability.</p>
-          <Link to="/work-with-me?type=Speaking%20invitation" className="btn btn--primary">
-            Send a speaking invitation
-          </Link>
-        </div>
-      </section>
+      <Seo
+        title="Book Charles Shima as a speaker"
+        description="Keynotes, panels and workshops on the Travelpreneur™ Economy, AI in travel and TikTok as a travel agent, and Rwanda beyond safari. Web Summit Vancouver, Black Travel Expo, Phocuswright."
+      />
+      <PageHero
+        title="Speaking"
+        intro="Keynotes, panels and workshops on the Travelpreneur™ Economy, AI in travel, and Rwanda beyond safari."
+        tone="marigold"
+      />
+      <SpeakingTopics />
+      <SpeakingStrip pageMode />
+      <ConnectBand />
     </>
   )
 }
@@ -72,8 +97,11 @@ export function Speaking() {
 export function Ventures() {
   return (
     <>
-      <Seo title="Ventures" description="Tourifique, ZaNiheza and other ventures built by Charles Shima." />
-      <PageHero title="Ventures" intro="The companies and initiatives I'm building." />
+      <Seo
+        title="Ventures: Tourifique and ZaNiheza"
+        description="Tourifique connects Travellers, Travelpreneurs and Suppliers through short-form travel reels. ZaNiheza is a travel tour company for immersive and cultural experiences in Rwanda."
+      />
+      <PageHero title="What I'm building" intro="The companies behind the advice." tone="emerald" />
       <VenturesBlock showHead={false} />
       <ConnectBand />
     </>
@@ -83,9 +111,10 @@ export function Ventures() {
 export function Perspectives() {
   return (
     <>
-      <Seo title="Perspectives" description="Interviews, press features and articles by and about Charles Shima." />
+      <Seo title="Perspectives" description="Interviews, press features and articles by and about Charles Shima, founder of Tourifique." />
       <PageHero title="Perspectives" intro="Interviews, features and things I've written." />
       <PressList showHead={false} />
+      <Newsletter />
     </>
   )
 }

@@ -29,6 +29,7 @@ create table if not exists public.contributions (
   summary text,
   body text,
   image_url text,
+  link_url text,
   sort_order int default 0,
   published boolean default true,
   created_at timestamptz default now()
@@ -112,6 +113,13 @@ create table if not exists public.bookings (
   created_at timestamptz default now()
 );
 
+create table if not exists public.subscribers (
+  id uuid primary key default gen_random_uuid(),
+  email text not null unique check (email ~* '^[^@\s]+@[^@\s]+\.[^@\s]+$' and char_length(email) <= 254),
+  source text check (source is null or char_length(source) <= 40),
+  created_at timestamptz default now()
+);
+
 -- ---------- Row-level security ----------------------------------------
 alter table public.admins        enable row level security;
 alter table public.site_settings enable row level security;
@@ -122,6 +130,7 @@ alter table public.press         enable row level security;
 alter table public.posts         enable row level security;
 alter table public.booking_types enable row level security;
 alter table public.bookings      enable row level security;
+alter table public.subscribers   enable row level security;
 
 do $$
 declare t text;
@@ -150,6 +159,12 @@ drop policy if exists "anyone can request" on public.bookings;
 create policy "anyone can request" on public.bookings for insert with check (status = 'new' and admin_notes is null);
 drop policy if exists "admin manage" on public.bookings;
 create policy "admin manage" on public.bookings for all using (public.is_admin()) with check (public.is_admin());
+
+-- Visitors may only ADD their email to the list (never read it).
+drop policy if exists "anyone can subscribe" on public.subscribers;
+create policy "anyone can subscribe" on public.subscribers for insert with check (true);
+drop policy if exists "admin manage" on public.subscribers;
+create policy "admin manage" on public.subscribers for all using (public.is_admin()) with check (public.is_admin());
 
 drop policy if exists "admins see admins" on public.admins;
 create policy "admins see admins" on public.admins for select using (public.is_admin());

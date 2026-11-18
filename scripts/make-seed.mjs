@@ -17,7 +17,7 @@ update public.site_settings set data = ${q(JSON.stringify(settings))}::jsonb
 where key = 'main' and data = '{}'::jsonb;
 
 `
-sql += block('contributions', d.defaultContributions, ['title', 'summary', 'image_url', 'sort_order']) + '\n'
+sql += block('contributions', d.defaultContributions, ['title', 'summary', 'link_url', 'image_url', 'sort_order']) + '\n'
 sql += block('speaking', d.defaultSpeaking, ['event', 'role', 'event_date', 'location', 'summary', 'image_url', 'link_url', 'sort_order']) + '\n'
 sql += block('ventures', d.defaultVentures, ['name', 'role', 'tagline', 'description', 'image_url', 'link_url', 'sort_order']) + '\n'
 sql += block('press', d.defaultPress, ['outlet', 'title', 'link_url', 'image_url', 'published_on', 'sort_order']) + '\n'
